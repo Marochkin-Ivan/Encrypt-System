@@ -9,7 +9,7 @@ import (
 )
 
 const firstReadableSymbol byte = 35
-const maxStringLen int = 20
+const maxStringLen int = 25
 
 func XorStrings(str1, str2 string) string {
 	buf := XorBytes([]byte(str1), []byte(str2), len(str2))
@@ -66,9 +66,9 @@ func RandomStringGen() string {
 }
 
 func CheckLastIdx(message string) (int, error) {
-	if !strings.Contains(message, "!") {
-		return -1, errors.New("invalid data")
+	if lastIdx := strings.Index(message, "!"); lastIdx == -1 {
+		return lastIdx, errors.New("invalid data")
+	} else {
+		return lastIdx, nil
 	}
-
-	return strings.Index(message, "!"), nil
 }
