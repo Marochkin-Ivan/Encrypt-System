@@ -30,7 +30,10 @@ func (c *Config) Init() {
 
 func (s *Server) EncryptFunc(message string) string {
 	keyIdx := GetKeyIdx(len(s.keys))
-	return XorStrings(strconv.Itoa(keyIdx), s.key4keys) + XorStrings(message, s.keys[keyIdx])
+	return XorStrings(strconv.Itoa(keyIdx), s.key4keys) +
+		XorStrings(message, s.keys[keyIdx]) +
+		"!" +
+		RandomStringGen()
 }
 
 func (s *Server) DecryptFunc(encryptMessage string) string {
@@ -39,5 +42,12 @@ func (s *Server) DecryptFunc(encryptMessage string) string {
 		log.Println(err)
 		return ""
 	}
-	return ReverseXorStrings(encryptMessage[1:], s.keys[keyIdx])
+
+	lastIdx, err := CheckLastIdx(encryptMessage)
+	if err != nil {
+		log.Println(err)
+		return ""
+	}
+
+	return ReverseXorStrings(encryptMessage[1:lastIdx], s.keys[keyIdx])
 }

@@ -97,8 +97,8 @@ func TestServer_Decrypt(t *testing.T) {
 		{
 			description:    "success2",
 			expectedCode:   http.StatusOK,
-			expectedResult: "Hello!!!",
-			request:        fmt.Sprintf("{\"message\":\"%s\"}", s.EncryptFunc("Hello!!!")),
+			expectedResult: "Hello???",
+			request:        fmt.Sprintf("{\"message\":\"%s\"}", s.EncryptFunc("Hello???")),
 			route:          "/decrypt",
 		},
 		{

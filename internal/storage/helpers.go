@@ -4,10 +4,12 @@ import (
 	"errors"
 	"math/rand"
 	"strconv"
+	"strings"
 	"time"
 )
 
-const firstReadableSymbol byte = 33
+const firstReadableSymbol byte = 35
+const maxStringLen int = 20
 
 func XorStrings(str1, str2 string) string {
 	buf := XorBytes([]byte(str1), []byte(str2), len(str2))
@@ -48,4 +50,24 @@ func CheckEncryptMessage(message string, key4keys string) (int, error) {
 		return -1, errors.New("invalid data")
 	}
 	return keyIdx, nil
+}
+
+func RandomStringGen() string {
+	var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*()_+{}[]|/`")
+
+	rand.Seed(time.Now().Unix())
+	l := rand.Intn(maxStringLen)
+
+	randStr := make([]rune, l)
+	for i := range randStr {
+		randStr[i] = letterRunes[rand.Intn(len(letterRunes))]
+	}
+	return string(randStr)
+}
+
+func CheckLastIdx(message string) (int, error) {
+	if !strings.Contains(message, "!") {
+		return -1, errors.New("invalid data")
+	}
+	return strings.Index(message, "!"), nil
 }
