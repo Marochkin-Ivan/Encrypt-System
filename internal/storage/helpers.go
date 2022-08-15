@@ -69,5 +69,6 @@ func CheckLastIdx(message string) (int, error) {
 	if !strings.Contains(message, "!") {
 		return -1, errors.New("invalid data")
 	}
+
 	return strings.Index(message, "!"), nil
 }

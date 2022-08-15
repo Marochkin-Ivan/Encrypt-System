@@ -21,7 +21,7 @@ func (s *Server) Init(c Config, a *fiber.App) {
 		"kjehrhhhfhfhfhhjnekjrbhahjyeqkgerjodbmnjkbhgvrbfkovdfjnefkemwnjerbslhjnavdsjktrbnerfewrevb",
 		"kek",
 	}
-	s.key4keys = "savagerandom"
+	s.key4keys = "savageRandom"
 }
 
 func (c *Config) Init() {
